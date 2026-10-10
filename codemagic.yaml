@@ -1,0 +1,72 @@
+workflows:
+  ios-testflight:
+    name: Mathe Tricks Trainer - TestFlight
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+
+    integrations:
+      # Gleicher App-Store-Connect-API-Schluessel wie bei der Rechenpyramide
+      # (Codemagic: Team settings > Integrations > Developer Portal).
+      app_store_connect: Codemagic Rechenpyramide 2
+
+    environment:
+      xcode: latest
+
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.larajade.mathetrickstrainer
+
+      vars:
+        XCODE_PROJECT: "MatheTricksTrainer.xcodeproj"
+        XCODE_SCHEME: "MatheTricksTrainer"
+
+    scripts:
+      - name: Release-Validator
+        script: |
+          cd "$CM_BUILD_DIR"
+          python3 tools/validate_release.py
+
+      - name: Projekt pruefen
+        script: |
+          echo "=== Repository ==="
+          ls -la
+
+          echo "=== Xcode-Projekt ==="
+          xcodebuild \
+            -project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            -list
+
+      - name: Code Signing konfigurieren
+        script: |
+          xcode-project use-profiles
+
+      - name: Buildnummer setzen
+        script: |
+          cd "$CM_BUILD_DIR"
+          agvtool new-version -all "$BUILD_NUMBER"
+
+      - name: IPA fuer TestFlight bauen
+        script: |
+          xcode-project build-ipa \
+            --project "$CM_BUILD_DIR/$XCODE_PROJECT" \
+            --scheme "$XCODE_SCHEME"
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false
