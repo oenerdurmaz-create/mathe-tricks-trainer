@@ -16,7 +16,7 @@ iOS-Lernspiel für Klasse 1–4: Rechentricks als Challenge gegen die Zeit – T
 | `tools/logic_test.js` | Logiktest aller 43 Trick-Pools |
 | `tools/check_layout.py` | prüft alle Tricks in 12 Sprachen auf Platz (Playwright) |
 | `tools/render_screens.py` | Screenshots 402×850 und 375×667 (Playwright) |
-| `tools/make_icon.py` | zeichnet das vorläufige App-Icon |
+| `tools/icon/app_icon.svg`, `tools/icon/render_icon.py` | App-Icon: Vorlage (SVG) und Umwandlung in 1024×1024 PNG ohne Alphakanal |
 | `docs/privacy.html`, `docs/support.html` | Datenschutz- und Support-Seite für App Store Connect |
 | `DEPLOY_BUILDxx.md` | was je Build geändert und geprüft wurde |
 | `PROJEKT.md` | Projektregeln und Entscheidungen |

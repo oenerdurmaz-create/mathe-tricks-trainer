@@ -14,7 +14,7 @@
 | Rechenpyramide | bleibt unverändert, kein Hinweis auf diese App; zwei getrennte Apps |
 | Build 1 (erste TestFlight-Version) | alle 43 Tricks, „Alle Tricks gemischt“ je Klasse (ohne Profi-Tricks), Klassen-Reiter |
 | Score/Best-Anzeige | Symbole 🎯 (Score) und 🏆 (Best) statt Wörter; keine Sterne |
-| App-Icon | vorläufig eigenes Icon (Zeit-Ring + Blitz) |
+| App-Icon | Rechenzeichen + − × ÷, Blitz in der Mitte, ablaufender Zeit-Ring (Quelle `tools/icon/app_icon.svg`) |
 
 ## App-Store-Vorgaben
 - Regel 4.3: keine Kopie der Rechenpyramide – eigenes Spielprinzip, eigenes Aussehen, keine Begriffe/Figuren der Rechenpyramide (Validator prüft).
